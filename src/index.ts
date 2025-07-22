@@ -1,4 +1,4 @@
-git import express, { Express } from "express";
+import express, { Express } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -30,7 +30,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/entries", entryRoutes);
 app.use(errorHandler);
 
-app.get("/", (_req, res) => {
+app.get("/", (_req: any, res: { send: (arg0: string) => void }) => {
   res.send("<h1>Welcome to Notely</h1>");
 });
 
