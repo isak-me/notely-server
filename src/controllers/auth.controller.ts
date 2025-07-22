@@ -81,9 +81,9 @@ export const activateAccount = async (req: Request, res: Response) => {
         return res.status(400).json({ message: "Invalid activation token." });
       }
       await client.user.update({ where: { id }, data: { verified: true } });
-      return res.status(200).json({
-        message: "Account activated successfully! You can now log in.",
-      });
+      // Redirect to login page with success param
+      const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+      return res.redirect(`${frontendUrl}/login?activated=1`);
     } catch (error) {
       return res
         .status(400)
