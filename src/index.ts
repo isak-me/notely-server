@@ -20,6 +20,7 @@ app.use(
     ],
     credentials: true,
     methods: ["POST", "GET", "PUT", "PATCH", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -29,10 +30,10 @@ app.use("/api/auth", authRoutes);
 app.use("/api/entries", entryRoutes);
 app.use(errorHandler);
 
-app.get("/", (_req, res) => {
+app.get("/", (_req: any, res: { send: (arg0: string) => void }) => {
   res.send("<h1>Welcome to Notely</h1>");
 });
 
-const port = process.env.PORT || 4800;
+const port = process.env.PORT || 4801;
 console.log(`App running on port ${port}`);
 app.listen(port);
