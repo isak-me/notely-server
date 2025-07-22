@@ -17,6 +17,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://s5kw9q5f-5173.uks1.devtunnels.ms",
+      "https://notley.onrender.com"
     ],
     credentials: true,
     methods: ["POST", "GET", "PUT", "PATCH", "DELETE"],
@@ -30,7 +31,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/entries", entryRoutes);
 app.use(errorHandler);
 
-app.get("/", (_req: any, res: { send: (arg0: string) => void }) => {
+app.get("/", (_req, res) => {
   res.send("<h1>Welcome to Notely</h1>");
 });
 
