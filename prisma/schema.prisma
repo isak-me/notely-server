@@ -38,7 +38,7 @@ model Entry {
   updatedAt     DateTime @updatedAt @map("updated_at")
 
   authorId   String
-  author     User   @relation(fields: [authorId], references: [id])
+  author     User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   @@map("entry")
 }
