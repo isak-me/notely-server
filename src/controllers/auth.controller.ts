@@ -153,7 +153,9 @@ export const forgotPassword = async (req: Request, res: Response) => {
     const token = jwt.sign({ email: oldUser.email, id: oldUser.id }, secret, {
       expiresIn: "5m",
     });
-    const link = `https://notely-server-production.up.railway.app/api/auth/reset-password/${oldUser.id}/${token}`;
+
+    const frontendUrl = process.env.FRONTEND_URL || "http://localhost:5173";
+    const link = `${frontendUrl}/reset-password/${oldUser.id}/${token}`;
 
     const transporter = nodemailer.createTransport({
       service: "gmail",

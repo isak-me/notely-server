@@ -30,7 +30,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/entries", entryRoutes);
 app.use(errorHandler);
 
-app.get("/", (_req: any, res: { send: (arg0: string) => void }) => {
+app.get("/", (_req, res) => {
   res.send("<h1>Welcome to Notely</h1>");
 });
 
