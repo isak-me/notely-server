@@ -164,8 +164,8 @@ export const uploadUserAvatar = async (req: AuthRequest, res: Response) => {
               { quality: "auto", fetch_format: "auto" },
             ],
           },
-          (error, result) => {
-            if (error) return reject(error);
+          (e, result) => {
+            if (e) return reject(e);
             resolve(result);
           }
         )
@@ -194,7 +194,6 @@ export const uploadUserAvatar = async (req: AuthRequest, res: Response) => {
       user: updatedUser,
     });
   } catch (e) {
-    console.error("Avatar upload error:", e);
     res.status(500).json({ message: "Failed to upload profile picture." });
   }
 };
