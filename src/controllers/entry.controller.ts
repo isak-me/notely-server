@@ -4,9 +4,13 @@ import { AuthRequest } from "../middlewares/userMiddleware";
 import OpenAI from "openai";
 
 const client = new PrismaClient();
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+
+let openai: OpenAI | null = null;
+if (process.env.OPENAI_API_KEY) {
+  openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+}
 
 export const getUserEntries = async (req: AuthRequest, res: Response) => {
   try {
@@ -246,14 +250,12 @@ export const summarizeEntry = async (req: AuthRequest, res: Response) => {
         .json({ message: "Content is required for summarization." });
 
     if (!textToSummarize || textToSummarize.trim().length < 50)
-      return res
-        .status(400)
-        .json({
-          message:
-            "Content is too short to summarize. Please write at least 50 characters.",
-        });
+      return res.status(400).json({
+        message:
+          "Content is too short to summarize. Please write at least 50 characters.",
+      });
 
-    if (!process.env.OPENAI_API_KEY)
+    if (!openai)
       return res.status(500).json({
         message:
           "AI summarization is not configured. Please contact the administrator.",
