@@ -5,12 +5,9 @@ import OpenAI from "openai";
 
 const client = new PrismaClient();
 
-let openai: OpenAI | null = null;
-if (process.env.OPENAI_API_KEY) {
-  openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-  });
-}
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 export const getUserEntries = async (req: AuthRequest, res: Response) => {
   try {
